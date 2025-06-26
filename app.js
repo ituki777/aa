@@ -13,16 +13,9 @@
 
 
 
-let hello1 = "Hello world!";
-const hello = "Hello!";
-
-hello1 = "Hello world! こんにちは！"; // 変数の値を変更することができるヨ
-// hello = ”こんにちは！”// 変数の値を変更することはできないヨ
-
-console.log(hello1);
-
 
 const pikachu = {id: 1 ,
+    areaId: "pikachu-area",
     name: "ぴかち" ,
     level: 1 , 
     type: ["denki"], 
@@ -30,24 +23,19 @@ const pikachu = {id: 1 ,
     attack: 55,
     defense: 40,
     speed: 90, 
-    skill: ["サンダーボルト", "でんこうせっか"],
+    skill: ["でんこうせっか","サンダーボルト"],
     levelUp: function(){
         this.level++;
+        this.hp += 10;
         if(this.level === 7){
             this.skill.push("かみなり");
         }
     }
 };
 
-console.log ("1st pikachu", pikachu.level,pikachu.skill);
-for (a=0; a < 1; a++){
-    pikachu.levelUp();
-    
-}
-
-
 
 const mokurou = {id: 2 ,
+    areaId: "mokurou-area",
     name: "もくろーちゃん" ,
     level: 1 ,
     type: ["kusa"],
@@ -58,20 +46,16 @@ const mokurou = {id: 2 ,
     skill: ["葉っぱカッター", "体当たり"],
     levelUp: function(){
         this.level++;
+        this.hp += 10;
         if(this.level === 15){
             this.skill.push("草の呼吸");
         }
     }
 };
 
-console.log("1mokurou" , mokurou.level,mokurou.skill);
-for (a=0; a < 1; a++){
-    mokurou.levelUp();
-}
-console.log("2mokurou" , mokurou.level,mokurou.skill);
-
 
 const mimikkyu = {id: 3 ,
+    areaId: "mimikkyu-area",
     name: "みみっきゅ",
     level: 1 ,
     type: ["ghost"],
@@ -82,33 +66,12 @@ const mimikkyu = {id: 3 ,
      skill: ["シャドークロウ", "じゃれつく"],
      levelUp: function(){
         this.level++;
+        this.hp += 10;
         if(this.level === 25){
             this.skill.push("身代わり");
         }
     }
 };
-
-for (a=0; a < 10; a++){
-    mimikkyu.levelUp();
-     mimikkyu.levelUp();
-}
-
-
-
-// const LevelUp = () => {
-//     console.log(pokemon[0]);
-//     pokemon[0].levelUp();
-//     console.log(pokemon[0]);
-
-//     for (let i = 0; i < pokemon.length; i++) {
-//         console.log(pokemon[i].levelUp());
-//     }
-// };
-
-// LevelUp();
-//     console.log(pokemon);
-
-
 
 
 function mypokemons(newpokemon1,newpokemon2){
@@ -132,33 +95,43 @@ mypokemons(`${mimikkyu.name}  レベル${mimikkyu.level}`);
 // mypokemons("ロコン");
 
 
-
 function updatePikachuName() {
-    document.getElementById('pikachu-name').textContent = `${pikachu.name}  レベル${pikachu.level} ${pikachu.skill}`;
+    let html = `${pikachu.name} <br> レベル${pikachu.level} <br> HP${pikachu.hp}`;
+    // if (pikachu.level > 1) {
+    //     html += `<br>${pikachu.skill.join('<br>')}`;
+    // }
+    document.getElementById('pikachu-name').innerHTML = html;
 }
 updatePikachuName();
 
-// 1つ目のpoke-ballボタンでピカチュウのレベルアップ
-const pokeBalls = document.querySelectorAll('.poke-ball');
+const pokeBalls = document.querySelectorAll('.poke-ball'); // ←これを追加
+
+// ピカチュウのレベルアップ時
+
 pokeBalls[0].addEventListener('click', () => {
     pikachu.levelUp();
     updatePikachuName();
-     // 色を一時的に変える
+    createSkillButtons(pikachu, "pikachu-skill-btns"); // ←修正
     pokeBalls[0].classList.add('active');
     setTimeout(() => {
         pokeBalls[0].classList.remove('active');
-    }, 300); // 0.3秒後に元に戻す
+    }, 300);
 });
 
-function updateMokurouName() {
-    document.getElementById('mokurou-name').textContent = `${mokurou.name}  レベル${mokurou.level} ${mokurou.skill}`;
+  function updateMokurouName() {
+    let html = `${mokurou.name} <br> レベル${mokurou.level} <br> HP${mokurou.hp}`;
+    // if (mokurou.level > 1) {
+    //     html += `<br>${mokurou.skill.join('<br>')}`;
+    // }
+    document.getElementById('mokurou-name').innerHTML = html;
 }
 updateMokurouName();
 
-// 2つ目のpoke-ballボタンでもくろーちゃんのレベルアップ
+// もくろーちゃん
 pokeBalls[1].addEventListener('click', () => {
     mokurou.levelUp();
     updateMokurouName();
+    createSkillButtons(mokurou, "mokurou-skill-btns"); // ←修正
     pokeBalls[1].classList.add('active');
     setTimeout(() => {
         pokeBalls[1].classList.remove('active');
@@ -167,31 +140,89 @@ pokeBalls[1].addEventListener('click', () => {
 
 
 function updatemimikkyuName() {
-    document.getElementById('mimikkyu-name').textContent = `${mimikkyu.name}  レベル${mimikkyu.level} ${mimikkyu.skill}`;
+    let html = `${mimikkyu.name} <br> レベル${mimikkyu.level} <br> HP${mimikkyu.hp} `;
+    // if (mimikkyu.level > 1) {
+    //     html += `<br>${mimikkyu.skill.join('<br>')}`;
+    // }
+    document.getElementById('mimikkyu-name').innerHTML = html;
 }
 updatemimikkyuName();
 
-// 3つ目のpoke-ballボタンでミミッキュのレベルアップ
+// ミミッキュ
 pokeBalls[2].addEventListener('click', () => {
     mimikkyu.levelUp();
     updatemimikkyuName();
+    createSkillButtons(mimikkyu, "mimikkyu-skill-btns"); // ←修正
     pokeBalls[2].classList.add('active');
     setTimeout(() => {
         pokeBalls[2].classList.remove('active');
     }, 300);
 });
 
+let selectedSkill = null;
+let selectedAttacker = null;
 
-document.getElementById('pikachu-name').textContent = pokemon[0];
-document.getElementById('mokurou-name').textContent = pokemon[1];
-document.getElementById('mimikkyu-name').textContent = pokemon[2];
+// スキルボタン生成
+function createSkillButtons(pokemon, btnsId) {
+    const btnsDiv = document.getElementById(btnsId);
+    btnsDiv.innerHTML = "";
+    pokemon.skill.forEach((skill) => {
+        const btn = document.createElement("button");
+        btn.textContent = skill;
+        btn.onclick = (event) => {
+            event.stopPropagation(); // これを追加！
+            selectedAttacker = pokemon;
+            selectedSkill = skill;
+            alert("攻撃したいポケモンをクリックしてください！");
+        };
+        btnsDiv.appendChild(btn);
+    });
+}
 
+// ポケモンエリアクリックで攻撃
+function setupTargetClick(target, updateTarget) {
+    const area = document.getElementById(target.areaId);
+    area.onclick = () => {
+        // ここでselectedAttackerを書き換えない！
+        if (selectedSkill && selectedAttacker) {
+            // 自分自身を攻撃しようとした場合は何もしない
+            if (target === selectedAttacker) {
+                alert("自分には攻撃できません！");
+                selectedSkill = null;
+                selectedAttacker = null;
+                return;
+            }
+            let damage = 0;
+            // スキル名でダメージ決定（例）
+            if (selectedSkill === "サンダーボルト") damage = 20;
+            if (selectedSkill === "でんこうせっか") damage = 10;
+            if (selectedSkill === "かみなり") damage = 30;
+            if (selectedSkill === "葉っぱカッター") damage = 15;
+            if (selectedSkill === "体当たり") damage = 10;
+            if (selectedSkill === "草の呼吸") damage = 25;
+            if (selectedSkill === "シャドークロウ") damage = 18;
+            if (selectedSkill === "じゃれつく") damage = 22;
+            if (selectedSkill === "身代わり") damage = 0;
 
-// 経験値要素
+            target.hp -= damage;
+            if (target.hp < 0) target.hp = 0;
+            updateTarget();
+            alert(`${selectedAttacker.name}の${selectedSkill}！\n${target.name}に${damage}ダメージ！`);
+            // リセット
+            selectedSkill = null;
+            selectedAttacker = null;
+        }
+    };
+}
 
+// 初期化
+createSkillButtons(pikachu, "pikachu-skill-btns");
+createSkillButtons(mokurou, "mokurou-skill-btns");
+createSkillButtons(mimikkyu, "mimikkyu-skill-btns");
 
-
-
+setupTargetClick(pikachu, updatePikachuName);
+setupTargetClick(mokurou, updateMokurouName);
+setupTargetClick(mimikkyu, updatemimikkyuName);
 
 
 

@@ -408,70 +408,166 @@
   display: flex;
   gap: 127px;
   justify-content: center;
-  align-items: flex-end;
-  margin-bottom: 24px;
+  align-items: stretch;
+  margin-bottom: 270px;
+  justify-content: center;   /* 横方向中央 */
+  align-items: flex-start;   /* 上揃え→中央にしたい場合はcenterに */
+  gap: 80px;                 /* ポケモン同士の間隔 */
+  margin-bottom: 100px;
 }
+.pokemon-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+#pikachu-name, #mokurou-name, #mimikkyu-name {
+  word-break: keep-all;   /* 英単語は折り返さない */
+  white-space: normal;    /* 通常の改行のみ */
+  text-align: center;
+  margin: 16px auto 0 auto;
+  
+}
+/* 
+.pikachu .ear,
+.pikachu .face,
+.pikachu .eye,
+.pikachu .nose,
+.pikachu .cheek,
+.pikachu .mouth,
+.rowlet .body,
+.rowlet .face,
+.rowlet .eye,
+.rowlet .beak,
+.rowlet .bow,
+.rowlet .wing,
+.rowlet .foot,
+.mimikyu .ear,
+.mimikyu .body,
+.mimikyu .face,
+.mimikyu .eye,
+.mimikyu .cheek,
+.mimikyu .mouth,
+.mimikyu .tail {
+  pointer-events: none;
+} */
+
+/* かっこいいスキルボタン */
+#pikachu-skill-btns button,
+#mokurou-skill-btns button,
+#mimikkyu-skill-btns button {
+  display: inline-block;
+  margin: 9px 0px;
+  padding: 18px 0px;
+  font-size: 0.9;
+  font-family: inherit;
+  border: none;
+  border-radius: 32px;
+  background: linear-gradient(120deg, #ffe066 0%, #ffd166 60%, #fff176 100%);
+  color: #222;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 16px #e1c97a88, 0 2px 0 #fff inset;
+  cursor: pointer;
+  transition: 
+    background 0.2s, 
+    transform 0.1s, 
+    box-shadow 0.2s;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+#pikachu-skill-btns button::before,
+#mokurou-skill-btns button::before,
+#mimikkyu-skill-btns button::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 100%);
+  border-radius: 32px;
+  z-index: 1;
+  pointer-events: none;
+}
+#pikachu-skill-btns button:hover,
+#mokurou-skill-btns button:hover,
+#mimikkyu-skill-btns button:hover {
+  background: linear-gradient(120deg, #fff176 0%, #ffe066 60%, #ffd166 100%);
+  color: #e63946;
+  transform: scale(1.09) rotate(-2deg);
+  box-shadow: 0 8px 24px #ffd166cc, 0 2px 0 #fff inset;
+}
+#pikachu-skill-btns button:active,
+#mokurou-skill-btns button:active,
+#mimikkyu-skill-btns button:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px #e1c97a88;
+}
+
 
     </style>
 </head>
 <body>
-    <button class="poke-ball"></button>
-    <button class="poke-ball"></button>
-    <button class="poke-ball"></button>
 
-     <h1>なかまたち</h1>
+     <h1>バトル！</h1>
 
-    <div class="pokemon-flex">
-      <div class="pikachu">
-        <div class="ear left"></div>
-        <div class="ear right"></div>
-        <div class="face">
-          <div class="eye left"></div>
-          <div class="eye right"></div>
-          <div class="nose"></div>
-          <div class="cheek left"></div>
-          <div class="cheek right"></div>
-          <div class="mouth"></div>
-          <div id="pikachu-name" style="text-align:center; margin-top:106px; font-size:1.1rem; color:#e63946;">肉</div>
- 
-        </div>
-      </div>
-
-      <div class="rowlet">
-        <div class="body">
-          <div class="face"></div>
-          <div class="eye left"><div class="eye-shine"></div></div>
-          <div class="eye right"><div class="eye-shine"></div></div>
-          <div class="beak"></div>
-          <div class="bow left"></div>
-          <div class="bow right"></div>
-          <div class="wing left"></div>
-          <div class="wing right"></div>
-          <div class="foot left"></div>
-          <div class="foot right"></div>
-           <div id="mokurou-name" style="text-align:center; margin-top:106px; font-size:1.1rem; color:#e63946;">肉</div>
- 
-        </div>
-      </div>
-
-      <div class="mimikyu">
-        <div class="ear left"></div>
-        <div class="ear right"></div>
-        <div class="body">
-          <div class="face">
-            <div class="eye left"></div>
-            <div class="eye right"></div>
-            <div class="cheek left"></div>
-            <div class="cheek right"></div>
-            <div class="mouth"></div>
-          </div>
-          <div class="tail"></div>
-           <div id="mimikkyu-name" style="text-align:center; margin-top:106px; font-size:1.1rem; color:#e63946;"></div>
- 
-        </div>
-      </div>
+<div class="pokemon-flex">
+  <div class="pokemon-column">
+  <button class="poke-ball"></button>
+  <div class="pikachu" id="pikachu-area">
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+    <div class="face">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="nose"></div>
+      <div class="cheek left"></div>
+      <div class="cheek right"></div>
+      <div class="mouth"></div>
+      <div id="pikachu-name" style="text-align:center; margin-top:145px; font-size:1.1rem; color:#e63946;"></div>
+      <div id="pikachu-skill-btns"></div>
     </div>
+  </div>
+</div>
 
+  <div class="pokemon-column">
+  <button class="poke-ball"></button>
+  <div class="rowlet" id="mokurou-area">
+    <div class="body">
+      <div class="face"></div>
+      <div class="eye left"><div class="eye-shine"></div></div>
+      <div class="eye right"><div class="eye-shine"></div></div>
+      <div class="beak"></div>
+      <div class="bow left"></div>
+      <div class="bow right"></div>
+      <div class="wing left"></div>
+      <div class="wing right"></div>
+      <div class="foot left"></div>
+      <div class="foot right"></div>
+      <div id="mokurou-name" style="text-align:center; margin-top:145px; font-size:1.1rem; color:#e63946;"></div>
+      <div id="mokurou-skill-btns"></div>
+    </div>
+  </div>
+</div>
+
+  <div class="pokemon-column">
+  <button class="poke-ball"></button>
+  <div class="mimikyu" id="mimikkyu-area">
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+    <div class="body">
+      <div class="face">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="cheek left"></div>
+        <div class="cheek right"></div>
+        <div class="mouth"></div>
+      </div>
+      <div class="tail"></div>
+      <div id="mimikkyu-name" style="text-align:center; margin-top:145px; font-size:1.1rem; color:#e63946;"></div>
+      <div id="mimikkyu-skill-btns"></div>
+    </div>
+  </div>
+</div>
 
     <script src="./app.js"></script>
 
