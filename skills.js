@@ -10,7 +10,7 @@ const skills = {
     "サンダーボルト": { damage: 20 },
     "放電": { damage: 50 },
     "かみなり": { damage: 30 },
-    "葉っぱカッター": { damage: 15 },
+    "葉っぱカッター": { damage: 50 },
     "体当たり": { damage: 10 },
     "草の呼吸": { damage: 25 },
     "羽交い締め": { damage: 18 },

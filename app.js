@@ -82,6 +82,39 @@ function showAttackEffect(target) {
     }, 400); // アニメーション時間と合わせる
 }
 
+function setFaintedStyle(pokemon) {
+    const area = document.getElementById(pokemon.areaId);
+
+    // ピカチュウ: .face と .ear
+    if (pokemon.areaId === "pikachu-area") {
+        const face = area.querySelector('.face');
+        if (face) face.classList.add('fainted');
+        area.querySelectorAll('.ear').forEach(ear => ear.classList.add('fainted'));
+    }
+
+    // モクロー: .body
+    if (pokemon.areaId === "mokurou-area") {
+        const body = area.querySelector('.body');
+        if (body) body.classList.add('fainted');
+    }
+
+    // ミミッキュ: .body と .ear
+    if (pokemon.areaId === "mimikkyu-area") {
+        const body = area.querySelector('.body');
+        if (body) body.classList.add('fainted');
+        area.querySelectorAll('.ear').forEach(ear => ear.classList.add('fainted'));
+    }
+
+    // 名前とボタンをグレーアウト＆ボタン無効化
+    const nameDiv = document.getElementById(`${pokemon.areaId.replace('-area', '')}-name`);
+    if (nameDiv) nameDiv.classList.add('fainted-text');
+
+    const btnsDiv = document.getElementById(`${pokemon.areaId.replace('-area', '')}-skill-btns`);
+    if (btnsDiv) {
+        btnsDiv.classList.add('fainted-text');
+        btnsDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
+    }
+}
 // --- ポケモンエリアクリックで攻撃 ---
 function setupTargetClick(target, updateTarget) {
     const area = document.getElementById(target.areaId);
@@ -98,6 +131,7 @@ function setupTargetClick(target, updateTarget) {
             if (target.hp < 0) target.hp = 0;
             updateTarget();
             showAttackEffect(target); // ★ここでエフェクト
+            if (target.hp === 0) setFaintedStyle(target);
             setTimeout(() => {
     alert(`${selectedAttacker.name}の${selectedSkill}！\n${target.name}に${damage}ダメージ！`);
     selectedSkill = null;

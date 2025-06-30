@@ -447,9 +447,11 @@
 #mokurou-skill-btns button,
 #mimikkyu-skill-btns button {
   display: inline-block;
+  width: 140px;              /* ← ボタンの幅を統一（お好みで調整） */
+  min-width: 140px;          /* ← 省略可。widthだけでもOK */
   margin: 9px 0px;
-  padding: 18px 0px;
-  font-size: 0.9;
+  padding: px 0px;
+  font-size: 1rem;
   font-family: inherit;
   border: none;
   border-radius: 32px;
@@ -466,6 +468,8 @@
   outline: none;
   position: relative;
   overflow: hidden;
+  text-align: center;        /* ← 文字を中央揃え */
+  white-space: nowrap;       /* ← 文字を折り返さない */
 }
 #pikachu-skill-btns button::before,
 #mokurou-skill-btns button::before,
@@ -493,6 +497,32 @@
   box-shadow: 0 2px 8px #e1c97a88;
 }
 
+/* 画像以外（名前・ボタン）をグレーアウト＆無効化 */
+.fainted-text {
+  color: #aaa !important;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.fainted-text button {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* 画像部分だけ「やられた」見た目 */
+.fainted {
+  filter: grayscale(100%) brightness(0.7);
+  transform: rotate(12deg) scale(0.95);
+  opacity: 0.7;
+  transition: all 0.4s;
+}
+
+.ear.fainted {
+  filter: grayscale(100%) brightness(0.7);
+  transform: rotate(12deg) scale(0.95) !important;
+  opacity: 0.7;
+  transition: all 0.4s;
+}
+
 
     </style>
 </head>
@@ -501,63 +531,68 @@
      <h1>バトル！</h1>
 
 <div class="pokemon-flex">
+  <!-- ピカチュウ -->
   <div class="pokemon-column">
-  <button class="poke-ball"></button>
-  <div class="pikachu" id="pikachu-area">
-    <div class="ear left"></div>
-    <div class="ear right"></div>
-    <div class="face">
-      <div class="eye left"></div>
-      <div class="eye right"></div>
-
-      <div class="eye left" id="pikachu-eye-left"></div>
-      <div class="eye right" id="pikachu-eye-right"></div>
-      
-      <div class="nose"></div>
-      <div class="cheek left"></div>
-      <div class="cheek right"></div>
-      <div class="mouth"></div>
-      <div id="pikachu-name" style="text-align:center; margin-top:145px; font-size:1.1rem; color:#e63946;"></div>
-      <div id="pikachu-skill-btns"></div>
-    </div>
-  </div>
-</div>
-
-  <div class="pokemon-column">
-  <button class="poke-ball"></button>
-  <div class="rowlet" id="mokurou-area">
-    <div class="body">
-      <div class="face"></div>
-      <div class="eye left"><div class="eye-shine"></div></div>
-      <div class="eye right"><div class="eye-shine"></div></div>
-      <div class="beak"></div>
-      <div class="bow left"></div>
-      <div class="bow right"></div>
-      <div class="wing left"></div>
-      <div class="wing right"></div>
-      <div class="foot left"></div>
-      <div class="foot right"></div>
-      <div id="mokurou-name" style="text-align:center; margin-top:145px; font-size:1.1rem; color:#e63946;"></div>
-      <div id="mokurou-skill-btns"></div>
-    </div>
-  </div>
-</div>
-
-  <div class="pokemon-column">
-  <button class="poke-ball"></button>
-  <div class="mimikyu" id="mimikkyu-area">
-    <div class="ear left"></div>
-    <div class="ear right"></div>
-    <div class="body">
+    <button class="poke-ball"></button>
+    <div class="pikachu" id="pikachu-area">
+      <div class="ear left"></div>
+      <div class="ear right"></div>
       <div class="face">
         <div class="eye left"></div>
         <div class="eye right"></div>
+        <div class="eye left" id="pikachu-eye-left"></div>
+        <div class="eye right" id="pikachu-eye-right"></div>
+        <div class="nose"></div>
         <div class="cheek left"></div>
         <div class="cheek right"></div>
         <div class="mouth"></div>
       </div>
-      <div class="tail"></div>
-      <div id="mimikkyu-name" style="text-align:center; margin-top:145px; font-size:1.1rem; color:#e63946;"></div>
+      <!-- 画像の外に名前・スキルボタン -->
+      <div id="pikachu-name" style="text-align:center; margin-top:180px; font-size:1.1rem; color:#e63946;"></div>
+      <div id="pikachu-skill-btns"></div>
+    </div>
+  </div>
+
+  <!-- モクロー -->
+  <div class="pokemon-column">
+    <button class="poke-ball"></button>
+    <div class="rowlet" id="mokurou-area">
+      <div class="body">
+        <div class="face"></div>
+        <div class="eye left"><div class="eye-shine"></div></div>
+        <div class="eye right"><div class="eye-shine"></div></div>
+        <div class="beak"></div>
+        <div class="bow left"></div>
+        <div class="bow right"></div>
+        <div class="wing left"></div>
+        <div class="wing right"></div>
+        <div class="foot left"></div>
+        <div class="foot right"></div>
+      </div>
+      <!-- 画像の外に名前・スキルボタン -->
+      <div id="mokurou-name" style="text-align:center; margin-top:180px; font-size:1.1rem; color:#e63946;"></div>
+      <div id="mokurou-skill-btns"></div>
+    </div>
+  </div>
+
+  <!-- ミミッキュ -->
+  <div class="pokemon-column">
+    <button class="poke-ball"></button>
+    <div class="mimikyu" id="mimikkyu-area">
+      <div class="ear left"></div>
+      <div class="ear right"></div>
+      <div class="body">
+        <div class="face">
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="cheek left"></div>
+          <div class="cheek right"></div>
+          <div class="mouth"></div>
+        </div>
+        <div class="tail"></div>
+      </div>
+      <!-- 画像の外に名前・スキルボタン -->
+      <div id="mimikkyu-name" style="text-align:center; margin-top:180px; font-size:1.1rem; color:#e63946;"></div>
       <div id="mimikkyu-skill-btns"></div>
     </div>
   </div>
