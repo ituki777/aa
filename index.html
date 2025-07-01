@@ -429,7 +429,7 @@
         #mimikkyu-name {
             width: 140px;
             font-size: 1.1rem;
-            margin: 184px auto 0 auto;
+            margin: 10px auto 0 auto;
             text-align: center;
             color: #e63946;
             white-space: nowrap;
@@ -528,6 +528,16 @@
             50%  { box-shadow: 0 0 80px 40px rgba(255,0,0,0.9); }
             100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); }
         }
+
+
+        @media (max-width: 600px) {
+  .pokemon-flex {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -552,9 +562,12 @@
         <div class="mouth"></div>
       </div>
       <!-- 画像の外に名前・スキルボタン -->
-      <div id="pikachu-name"></div>
-      <div id="pikachu-skill-btns"></div>
-    </div>
+
+      </div>
+    <div id="pikachu-name"></div>
+    <div id="pikachu-level"></div>
+    <div id="pikachu-hp"></div>
+    <div id="pikachu-skill-btns"></div>
   </div>
 
   <!-- モクロー -->
@@ -574,33 +587,34 @@
         <div class="foot right"></div>
       </div>
       <!-- 画像の外に名前・スキルボタン -->
-      <div id="mokurou-name"></div>
-      <div id="mokurou-skill-btns"></div>
-    </div>
+      </div>
+    <div id="mokurou-name"></div>
+    <div id="mokurou-level"></div>
+    <div id="mokurou-hp"></div>
+    <div id="mokurou-skill-btns"></div>
   </div>
 
   <!-- ミミッキュ -->
   <div class="pokemon-column">
     <button class="poke-ball"></button>
     <div class="mimikyu" id="mimikkyu-area">
-      <div class="ear left"></div>
-      <div class="ear right"></div>
-      <div class="body">
-        <div class="face">
-          <div class="eye left"></div>
-          <div class="eye right"></div>
-          <div class="cheek left"></div>
-          <div class="cheek right"></div>
-          <div class="mouth"></div>
-        </div>
-        <div class="tail"></div>
-      </div>
-      <!-- 画像の外に名前・スキルボタン -->
-      <div id="mimikkyu-name"></div>
-      <div id="mimikkyu-skill-btns"></div>
+  <div class="ear left"></div>
+  <div class="ear right"></div>
+  <div class="body">
+    <div class="face">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="cheek left"></div>
+      <div class="cheek right"></div>
+      <div class="mouth"></div>
     </div>
+    <div class="tail"></div>
   </div>
 </div>
+<div id="mimikkyu-name"></div>
+<div id="mimikkyu-level"></div>
+<div id="mimikkyu-hp"></div>
+<div id="mimikkyu-skill-btns"></div>
 
     <script src="skills.js"></script>
     <script src="pokemons.js"></script>
