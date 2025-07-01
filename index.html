@@ -523,6 +523,51 @@
   transition: all 0.4s;
 }
 
+/* スマホ用レスポンシブ対応 */
+@media (max-width: 600px) {
+  .pokemon-flex {
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 40px;
+    align-items: center;
+  }
+  .pokemon-column {
+    width: 100%;
+    align-items: center;
+  }
+  .pikachu, .rowlet, .mimikyu {
+    width: 90vw;
+    max-width: 320px;
+    min-width: 180px;
+    height: auto;
+    margin: 16px auto;
+  }
+  .pikachu .face,
+  .rowlet .body,
+  .mimikyu .body {
+    width: 90vw;
+    max-width: 320px;
+    min-width: 180px;
+    height: auto;
+  }
+  #pikachu-name, #mokurou-name, #mimikkyu-name {
+    font-size: 1rem;
+    margin-top: 12px;
+  }
+  #pikachu-skill-btns button,
+  #mokurou-skill-btns button,
+  #mimikkyu-skill-btns button {
+    width: 90vw;
+    max-width: 320px;
+    min-width: 140px;
+    font-size: 1rem;
+    margin: 6px 0;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+}
+
 
     </style>
 </head>
